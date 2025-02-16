@@ -21,10 +21,25 @@ int pack(char a, char b, char c, char d)
     return p;
 }
 
+void unpack(int p, char *a, char *b, char *c, char *d)
+{
+    *d = p & 0xFF;
+    *c = (p >> 8) & 0xFF;
+    *b = (p >> 16) & 0xFF;
+    *a = (p >> 24) & 0xFF;
+}
+
 int main() {
+    int packed = pack('a', 'b', 'c', 'd'); // i will use it more than once
+
+
     printf("abcd =");
-    bit_print(pack('a', 'b', 'c', 'd'));
+    bit_print(packed);
     putchar('\n');
+
+    char a, b, c, d;
+    unpack(packed, &a, &b, &c, &d);
+    printf("Unpacked: %c %c %c %c\n", a, b, c, d);
     
     return 0;
 }
